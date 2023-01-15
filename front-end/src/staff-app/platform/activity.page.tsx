@@ -9,11 +9,11 @@ import { Activity } from "shared/models/activity"
 import { RollListTile } from "staff-app/components/roll-list-tile/roll-list-tile.component"
 
 export const ActivityPage: React.FC = () => {
-  const [getStudents, data, loadState] = useApi<{ activity: Activity[] }>({ url: "get-activities" });
+  const [getActivities, data, loadState] = useApi<{ activity: Activity[] }>({ url: "get-activities" });
 
   useEffect(() => {
-    void getStudents();
-  }, [getStudents]);
+    void getActivities();
+  }, [getActivities]);
 
   console.log(data);
 

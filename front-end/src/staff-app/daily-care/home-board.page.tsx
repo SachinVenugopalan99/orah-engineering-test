@@ -125,7 +125,7 @@ export const HomeBoardPage: React.FC = () => {
     setSearchTerm(value);
   }
 
-  const onRoleClick = (type: ItemType) => {
+  const onRoleConfirmationClick = (type: ItemType) => {
     let result = [];
     if (debouncedSearhTerm) {
       result = renderList?.filter((item) => item?.full_name?.toLowerCase()?.includes(debouncedSearhTerm?.toLowerCase()));
@@ -154,7 +154,11 @@ export const HomeBoardPage: React.FC = () => {
         {loadState === "loaded" && (
           <>
             {studentList.map((s) => (
-              <StudentListTile key={s.id} isRollMode={isRollMode} student={s} getRoll={getRoll}/>
+              <StudentListTile 
+              key={s.id} 
+              isRollMode={isRollMode} 
+              student={s} 
+              getRoll={getRoll}/>
             ))}
           </>
         )}
@@ -175,7 +179,7 @@ export const HomeBoardPage: React.FC = () => {
       onItemClick={onActiveRollAction} 
       students={renderList} 
       total={renderList?.length} 
-      onRoleClick={onRoleClick} />
+      onRoleClick={onRoleConfirmationClick} />
     </>
   )
 }
@@ -190,7 +194,10 @@ const Toolbar: React.FC<ToolbarProps> = (props) => {
   const { onItemClick, isFirstName, searchValue } = props
   return (
     <S.ToolbarContainer>
-      <div className="nameContainer" onClick={(e) => onItemClick('name')}>{isFirstName ? 'First Name' : 'Last Name'}
+      <div 
+      className="nameContainer" 
+      onClick={(e) => onItemClick('name')}>
+        {isFirstName ? 'First Name' : 'Last Name'}
       <img
       className="sortIcon"
       onClick={(e: React.MouseEvent<HTMLElement>) => {
@@ -206,7 +213,10 @@ const Toolbar: React.FC<ToolbarProps> = (props) => {
       placeholder="Search"
       onChange={(e) => searchValue(e.target.value)}
       />
-      <S.Button onClick={(e) => onItemClick("roll")}>Start Roll</S.Button>
+      <S.Button 
+      onClick={(e) => onItemClick("roll")}>
+        Start Roll
+        </S.Button>
     </S.ToolbarContainer>
   )
 }
