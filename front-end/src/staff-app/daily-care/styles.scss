@@ -1,0 +1,16 @@
+.nameContainer {
+    display: flex;
+    align-items: center;
+}
+.sortIcon{
+    cursor: pointer;
+}
+.noResults{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 200px;
+    font-weight: 500;
+}

@@ -3,35 +3,30 @@ import styled from "styled-components"
 import { Spacing, BorderRadius, FontWeight } from "shared/styles/styles"
 import { Images } from "assets/images"
 import { Colors } from "shared/styles/colors"
-import { Person, PersonHelper } from "shared/models/person"
-import { RollStateSwitcher } from "staff-app/components/roll-state/roll-state-switcher.component"
-import { RolllStateType } from "shared/models/roll"
+import { RollStateList } from "staff-app/components/roll-state/roll-state-list.component"
+import { Roll } from "shared/models/roll"
 
 interface Props {
-  isRollMode?: boolean
-  student: Person
-  getRoll: (role: string, id: number) => void
+    entity: Roll
 }
-export const StudentListTile: React.FC<Props> = ({ isRollMode, student, getRoll }) => {
-
-  const onStateChange = (role: string) => {
-     getRoll(role, student?.id);
-  }
+export const RollListTile: React.FC<Props> = ({ entity }) => {
 
   return (
     <S.Container>
       <S.Avatar url={Images.avatar}></S.Avatar>
       <S.Content>
-        <div>{PersonHelper.getFullName(student)}</div>
+        <div>{entity.name}</div>
       </S.Content>
-      {isRollMode && (
         <S.Roll>
-          <RollStateSwitcher 
-          onStateChange={onStateChange}
-          initialState={student?.role as RolllStateType}
+        <RollStateList
+            stateList={[
+              { type: "all", count: entity?.student_roll_states?.length },
+              { type: "present", count: entity?.student_roll_states?.filter((item) => item?.roll_state === 'present')?.length },
+              { type: "late", count: entity?.student_roll_states?.filter((item) => item?.roll_state === 'late')?.length },
+              { type: "absent", count: entity?.student_roll_states?.filter((item) => item?.roll_state === 'absent')?.length },
+            ]}
           />
         </S.Roll>
-      )}
     </S.Container>
   )
 }
@@ -62,6 +57,8 @@ const S = {
   `,
   Content: styled.div`
     flex-grow: 1;
+    display: flex;
+    align-items: center;
     padding: ${Spacing.u2};
     color: ${Colors.dark.base};
     font-weight: ${FontWeight.strong};

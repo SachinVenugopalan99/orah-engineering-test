@@ -9,4 +9,6 @@ export interface RollInput {
   student_roll_states: { student_id: number; roll_state: RolllStateType }[]
 }
 
+export type ItemType = RolllStateType | "all"
+
 export type RolllStateType = "unmark" | "present" | "absent" | "late"

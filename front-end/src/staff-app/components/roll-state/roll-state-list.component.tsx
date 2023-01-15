@@ -7,13 +7,13 @@ import { RolllStateType } from "shared/models/roll"
 
 interface Props {
   stateList: StateList[]
-  onItemClick?: (type: ItemType) => void
+  onRoleClick?: (type: ItemType) => void
   size?: number
 }
-export const RollStateList: React.FC<Props> = ({ stateList, size = 14, onItemClick }) => {
+export const RollStateList: React.FC<Props> = ({ stateList, size = 14, onRoleClick }) => {
   const onClick = (type: ItemType) => {
-    if (onItemClick) {
-      onItemClick(type)
+    if (onRoleClick) {
+      onRoleClick(type)
     }
   }
 
@@ -23,7 +23,7 @@ export const RollStateList: React.FC<Props> = ({ stateList, size = 14, onItemCli
         if (s.type === "all") {
           return (
             <S.ListItem key={i}>
-              <FontAwesomeIcon icon="users" size="sm" style={{ cursor: "pointer" }} onClick={() => onClick(s.type)} />
+              <FontAwesomeIcon icon="users" size="sm" style={{ cursor: onRoleClick ? "pointer" : 'auto' }} onClick={() => onClick(s.type)} />
               <span>{s.count}</span>
             </S.ListItem>
           )

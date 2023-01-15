@@ -14,7 +14,7 @@ export const RollStateIcon: React.FC<Props> = (props) => {
   const { type, size = 20, onClick } = props
   return (
     <S.Icon size={size} border={type === "unmark"} bgColor={getBgColor(type)} clickable={Boolean(onClick)} onClick={onClick}>
-      <FontAwesomeIcon icon="check" size={size > 14 ? "lg" : "sm"} />
+      <FontAwesomeIcon icon="check" size={size > 14 ? "lg" : "sm"} style={{ cursor: Boolean(onClick) ? 'pointer' : 'auto' }}/>
     </S.Icon>
   )
 }
@@ -45,6 +45,6 @@ const S = {
     border-radius: ${BorderRadius.rounded};
     width: ${({ size }) => size}px;
     height: ${({ size }) => size}px;
-    cursor: ${({ clickable }) => (clickable ? "pointer" : undefined)};
+    cursor: ${({ clickable }) => (clickable ? "pointer" : 'auto')};
   `,
 }
